@@ -1,12 +1,12 @@
 <script setup>
 import Quiz from './components/Quiz.vue';
-import Chat from './components/Chat.vue';
+import Chat from './components/Chat/Chat.vue';
 </script>
 
 <template>
   <div>
     <Chat/>
-    <Quiz/>
+    <!-- <Quiz/> -->
   </div>
 </template>
 
@@ -17,4 +17,4 @@ import Chat from './components/Chat.vue';
     align-items: center;
     height: 100vh;
   }
-</style>
+</style>./components/Chat/Chat.vue
