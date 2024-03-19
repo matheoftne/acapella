@@ -17,4 +17,4 @@ import Chat from './components/Chat/Chat.vue';
     align-items: center;
     height: 100vh;
   }
-</style>./components/Chat/Chat.vue
+</style>
