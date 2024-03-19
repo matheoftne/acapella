@@ -1,12 +1,12 @@
 <script setup>
 import Quiz from './components/Quiz.vue';
-import Chat from './components/Chat.vue';
+import Chat from './components/Chat/Chat.vue';
 </script>
 
 <template>
   <div>
     <Chat/>
-    <Quiz/>
+    <!-- <Quiz/> -->
   </div>
 </template>
 
