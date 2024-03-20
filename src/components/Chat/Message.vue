@@ -12,22 +12,45 @@ export default {
             messages:ref([])
         }
     },
-    mounted() {const messages = onSnapshot(
-        query(collection(db, '/chats/' + this?.client.id + '/messages')),
 
-        orderBy('date', 'desc'),
-
-        (snapshot) => {
-            this.messages = snapshot.docs.map((doc) => {
-                return {...doc.data(), id:doc.id}
-            })
+    methods: {
+        sendMessage: function() {
+            addDoc(collection(db, 'chats/' + this.client.id + '/messages'),
+        {
+            text: this.$refs.newMessage.value,
+            admin: true,
+            date: Date.now()
         }
-    )}
+        )
+        let updateLatestMessage = {...this.client, latestMessage: this.$refs.newMessage.value}
+        delete updateLatestMessage.id;
+        setDoc(doc(db, 'chats/' + this.client.id), updateLatestMessage);
+        this.$refs.newMessage.value = '';
+        }
+    },
+
+    mounted() {
+        let updateSeen = {...this.client, seen: true}
+        delete updateSeen.id;
+        setDoc(doc(db, 'chats/' + this.client.id), updateSeen);
+        this.client.seen = true;
+
+        const messages = onSnapshot(
+            query(collection(db, 'chats/' + this?.client.id + '/messages'),orderBy('date', 'desc')),
+
+            (snapshot) => {
+                this.messages = snapshot.docs.map((doc) => {
+                    return {...doc.data(), id:doc.id}
+                })
+            }
+        );
+        onUnmounted(messages)
+    }
 }
 </script>
 
 <template>
-    <div>chat with : {{ client.name }}</div>
+    <div>Anonyme</div>
     <div class="chatbox">
         <div v-for="message in messages">
             <div :class="message.admin ? 'admin': 'client'">
@@ -35,6 +58,8 @@ export default {
             </div>
         </div>
     </div>
+    <input type="text" @keypress.enter="sendMessage" ref="newMessage" placeholder="new message ...">
+    <button @click="sendMessage" class="btn btn-primary">send</button>
 </template>
 
 <style>

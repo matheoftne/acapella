@@ -15,6 +15,6 @@ import Chat from './components/Chat/Chat.vue';
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    flex-direction: column;
   }
 </style>
