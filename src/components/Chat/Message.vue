@@ -58,7 +58,6 @@ export default {
             <div class="messageItems" :class="message.admin ? 'admin': 'client'">
                 {{ message.text }}
             </div>
-            <span class="sepChat"></span>
         </div>
     </div>
     <div class="inputTextContainer">
@@ -94,7 +93,7 @@ export default {
 .inputTextContainer {
     position: absolute;
     z-index: 2;
-    inset: auto 10% 5% 30%;
+    inset: auto 8% 5% 31%;
     display: flex;
     gap: 1em;
     justify-content: center;
@@ -111,7 +110,7 @@ export default {
 
 .chatbox {
     height: 80vh;
-    width: 69vw;
+    width: 67vw;
     overflow: scroll;
     flex-direction: column-reverse;
     background-color: #DEDCFF;
@@ -129,7 +128,6 @@ export default {
 .chatbox > div > div {
     padding: 0.8rem;
     margin: 0.5rem 1em;
-    border-radius: 4px;
     text-align: left;
     max-width: fit-content;
     width: 40vw;
@@ -139,11 +137,13 @@ export default {
 .client {
     align-self: start;
     background-color: #fff;
+    border-radius: 4px 4px 4px 0;
 }
 
 .admin {
     align-self: end;
     background-color: #3454D1;
     color: #fff;
+    border-radius: 4px 4px 0 4px;
 }
 </style>

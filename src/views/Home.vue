@@ -2,7 +2,7 @@
     <h1>Home</h1>
 </template>
 
-<style>
+<style scoped>
     h1 {
         color: red;
     }

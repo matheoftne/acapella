@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../App.vue';
-import Chat from '../components/Chat/Conversation.vue';
+import Home from '../views/Home.vue';
+import ChatPro from '../components/Chat/Conversation.vue';
+import Chat from '../views/Chat.vue';
 import Quiz from '../components/Quiz.vue';
 import NotFound from '../views/NotFound.vue';
 
@@ -32,6 +33,13 @@ const routes = [
         component: NotFound,
         meta: {
             title: '404 Not Found'
+        }
+    }, {
+        name: 'Chat Pro',
+        path: '/chat-pro',
+        component: ChatPro,
+        meta: {
+            title: 'Chat Pro'
         }
     }
 ];

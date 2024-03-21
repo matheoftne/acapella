@@ -104,9 +104,12 @@ export default {
         <div :style="{ backgroundColor: colors[index % colors.length] }" class="ppContainer">
           <span>{{ getUserInitial(chat.id) }}</span>
         </div>
-        <div @click="toggleMessage(chat)" class="btnChat" :class="chat.seen ? 'btn-secondary' : 'btn-primary' ">
-          <strong style="font-size: 1.2em;">Anonyme</strong> <br class="brChat">
-          <p style="margin: 0; font-size: 0.9em;">{{ chat.id }}</p>
+        <div @click="toggleMessage(chat)" class="btnChat">
+          <div>
+            <span :class="chat.seen ? 'btn-secondary' : 'btn-primary' "><i class="fa-solid fa-circle"></i></span>
+            <strong style="font-size: 1.2em;"> Anonyme</strong> <br class="brChat">
+            <p style="margin: 0; font-size: 0.9em;">{{ chat.id }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -124,6 +127,20 @@ export default {
 </template>
 
 <style scoped>
+.btnChat {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #007bff;
+}
+
+.btn-secondary {
+  color: #6c757d;
+}
+
 .brChat {
   margin: 5em;
 }
