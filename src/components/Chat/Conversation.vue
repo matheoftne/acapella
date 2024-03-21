@@ -164,6 +164,7 @@ export default {
 
 .ChatContainer {
   display: grid;
+  gap: 2em;
   grid-template-columns: 1fr 3fr;
   flex-direction: row;
   justify-content: space-between;
