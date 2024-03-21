@@ -8,7 +8,7 @@ import Quiz from './components/Quiz.vue'
 
 <template>
   <Header />
-  <Quiz />
+  <Chat />
 </template>
 
 <style scoped>

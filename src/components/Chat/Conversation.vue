@@ -98,7 +98,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="loggedIn" class="ChatContainer">
+  <div v-if="loggedIn" class="ChatContainer pad-base">
     <div class="UserChatContainer">
       <div v-for="(chat, index) in chats" class="UserChatItems">
         <div :style="{ backgroundColor: colors[index % colors.length] }" class="ppContainer">
@@ -116,8 +116,7 @@ export default {
         <message :client="message"></message>
       </div>
     </div>
-    <button @click="logout">logout</button>
-    </div>
+  </div>
   </div>
   <div v-else>
     <button @click="login">login</button>
@@ -150,8 +149,9 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  height: 80vh;
+  height: 79vh;
   overflow: hidden;
+  position: relative;
 }
 
 .titleMessageContainer {

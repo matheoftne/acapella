@@ -26,7 +26,10 @@ export default {
         delete updateLatestMessage.id;
         setDoc(doc(db, 'chats/' + this.client.id), updateLatestMessage);
         this.$refs.newMessage.value = '';
-        }
+        },
+        logout: function() {
+            signOut(auth);
+        },
     },
 
     mounted() {
@@ -50,27 +53,72 @@ export default {
 </script>
 
 <template>
-    <div>Anonyme</div>
     <div class="chatbox">
-        <div v-for="message in messages">
-            <div :class="message.admin ? 'admin': 'client'">
+        <div v-for="message in messages" class="messageContainer">
+            <div class="messageItems" :class="message.admin ? 'admin': 'client'">
                 {{ message.text }}
             </div>
+            <span class="sepChat"></span>
         </div>
     </div>
-    <input type="text" @keypress.enter="sendMessage" ref="newMessage" placeholder="new message ...">
-    <button @click="sendMessage" class="btn btn-primary">send</button>
+    <div class="inputTextContainer">
+        <span><i class="fa-regular fa-face-smile btnChatText"></i></span>
+        <input class="inputChat" type="text" @keypress.enter="sendMessage" ref="newMessage" placeholder="Ecrire un message ...">
+        <button @click="sendMessage" class="btn btn-primary btnChatText"><i class="fa-solid fa-paper-plane"></i></button>
+        <button @click="logout" class="btnChatText"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+    </div>
 </template>
 
 <style>
+.btnChatText {
+    background: none;
+    color: #000;
+}
+
+.btnChatText:hover {
+    color: #3454D1;
+    background: none;
+}
+
+.inputChat {
+    border: none;
+    background: none;
+    width: 45vw;
+    font-size: 1.2em;
+}
+
+.inputChat:focus {
+    outline: none;
+}
+
+.inputTextContainer {
+    position: absolute;
+    z-index: 2;
+    inset: auto 10% 5% 30%;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #B0B0B0;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(11.699999809265137px);
+    border-radius: 20px;
+}
+
+.messageContainer:first-child {
+    margin-bottom: 5em;
+}
+
 .chatbox {
-    height: 50vh;
+    height: 80vh;
+    width: 69vw;
     overflow: scroll;
     flex-direction: column-reverse;
-    background-color: brown;
+    background-color: #DEDCFF;
     border-radius: 5px;
     display: flex;
     color: black;
+    scrollbar-width: none;
 }
 
 .chatbox > div {
@@ -79,18 +127,23 @@ export default {
 }
 
 .chatbox > div > div {
-    padding: 0.5rem;
-    margin: 0.5rem;
+    padding: 0.8rem;
+    margin: 0.5rem 1em;
     border-radius: 4px;
+    text-align: left;
+    max-width: fit-content;
+    width: 40vw;
+    word-wrap: break-word;
 }
 
 .client {
     align-self: start;
-    background-color: #fdff8f;
+    background-color: #fff;
 }
 
 .admin {
     align-self: end;
-    background-color: white;
+    background-color: #3454D1;
+    color: #fff;
 }
 </style>
