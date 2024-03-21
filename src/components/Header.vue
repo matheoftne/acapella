@@ -5,7 +5,9 @@
 <template>
     <div class="menuContainer pad-base">
         <div class="logoContainer">
-            <img class="logo" src="/logo-acapela.png" alt="">
+            <router-link to="/">
+                <img class="logo" src="/logo-acapela.png" alt="">
+            </router-link>
         </div>
         <nav class="menuItems">
             <router-link to="/">Parlons en ?</router-link>
