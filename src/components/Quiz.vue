@@ -222,13 +222,19 @@
 </script>
 
 <template>
-  <div class="quiz-ctn">
 
-    <div class="quiz-header">
-      <h1>Quiz</h1>
-      <div class="progress-bar" :style="{ width: progressBarPercentage + '%' }"></div>
+  <div class="quiz-header">
+    <h1>Quiz</h1>
+    <div class="progress-bar-cont" :style="{ width: progressBarPercentage + '%' }">
+      <div class="progress-bar"></div>
+      <p v-if="progressBarPercentage !== 0">{{ Math.round(progressBarPercentage) }}%</p>
     </div>
     
+  </div>
+
+  <div class="quiz-ctn">
+
+    <h2 v-if="!quizEnded">Question n°{{ getCurrentQuestion.index + 1 }}</h2>
 
     <section class="quiz">
       <div class="quiz-playing" v-if="!quizEnded">
@@ -294,70 +300,110 @@
     text-align: left;
     padding: 3rem 0 3rem 5rem;
     color: white;
+    margin-bottom: 5rem;
   }
 
-  .progress-bar {
-      position: absolute;
-      inset: 100% 0 auto;
-      height: 10px;
-      width: 50%;
-      background-color: #FFA1A1;
-      transition: width .5s ease-in-out;
+  .progress-bar-cont {
+    position: absolute;
+    text-align: end;
+    inset: 100% 0 0;
+    color: black;
+    height: 8px;
+    background-color: #FFA1A1;
+    transition: width .5s ease-in-out;
+    width: 50%;
+
+      & .progress-bar {
+        inset: 100% 0 auto;
+      }
+
+      & p {
+        padding-right: .5rem;
+        margin: 10px 0 0;
+        font-size: 16px;
+        color: #3454D1;
+        font-weight: 700;
+      }
+
     }
 
-.quiz-ctn {
-
-  flex-direction: column;
-
-  & .quiz {
-    min-height: 300px;
-    width: 500px;
-    border: 2px solid white;
-    border-radius: 15px;
-    padding: 2rem;
-    position: relative;
-    overflow: clip;
-
-    & .question {
-      font-size: 24px;
+    h2 {
+      margin-bottom: 5rem;
     }
 
-    & .options {
-      font-size: 20px;
+    .quiz-ctn {
+      
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 22rem;
+      
+        & .quiz {
 
-      & .option {
-        display: flex;
-        margin-block: 2rem;
-        padding: 1rem 1.5rem;
-        background-color: rgba(255, 255, 255, .3);
-        border-radius: 5px;
-        cursor: pointer;
+        align-self: center;
+        background-color: #3454D1;
+        border-radius: 15px;
+        width: 740px;
+        padding: 2.5rem 10rem;
+        
+        
+        & .quiz-playing, & .quiz-ended {
+          
+          color: white;
+          min-height: 300px;
+          padding: 2rem;
+          position: relative;
+          overflow: clip;
 
-        & input {
-          display: none;
         }
 
-        &:hover:not(.option-selected) {
-          opacity: .8;
+        & .question {
+          font-size: 20px;
+          font-weight: 600;
         }
 
-        &.option-selected {
-          outline: white solid 1px;
-          outline-offset: 2px;
+        & .options {
+          font-size: 20px;
+
+          & .option {
+            display: flex;
+            margin-block: 2rem;
+            padding: 1rem 1.5rem;
+            color: black;
+            background-color: rgba(255, 255, 255, .7);
+            border-radius: 5px;
+            cursor: pointer;
+
+            & input {
+              display: none;
+            }
+
+            &:hover:not(.option-selected) {
+              opacity: .8;
+            }
+
+            &.option-selected {
+              outline: white solid 1px;
+              outline-offset: 2px;
+            }
+
+          }
+
+        }
+
+        & .buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          align-items: center;
+
+          & button {
+            padding: .5rem 1.5rem;
+            border: white solid 1px;
+            border-radius: 10px;
+          }
         }
 
       }
 
     }
-
-    & .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: center;
-    }
-
-  }
-
-}
 </style>
