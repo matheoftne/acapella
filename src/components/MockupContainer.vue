@@ -64,4 +64,10 @@
     }
 
     .strongPink {color: #FFA1A1;}
+
+    h2 {
+        font-size: 3em;
+        line-height: 1.1;
+    }
+
 </style>
