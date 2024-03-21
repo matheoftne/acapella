@@ -1,5 +1,6 @@
 <script>
-import { db } from '../../firebase.js';
+import { db, auth } from '../../firebase.js';
+import { signOut } from 'firebase/auth';
 import { onSnapshot, collection, doc, deleteDoc, setDoc, addDoc, orderBy, query } from 'firebase/firestore';
 import { ref, onUnmounted } from 'vue';
 
@@ -61,7 +62,7 @@ export default {
         </div>
     </div>
     <div class="inputTextContainer">
-        <span><i class="fa-regular fa-face-smile btnChatText"></i></span>
+        <span style="margin-left: 2em;"><i class="fa-regular fa-face-smile btnChatText"></i></span>
         <input class="inputChat" type="text" @keypress.enter="sendMessage" ref="newMessage" placeholder="Ecrire un message ...">
         <button @click="sendMessage" class="btn btn-primary btnChatText"><i class="fa-solid fa-paper-plane"></i></button>
         <button @click="logout" class="btnChatText"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
@@ -93,10 +94,10 @@ export default {
 .inputTextContainer {
     position: absolute;
     z-index: 2;
-    inset: auto 8% 5% 31%;
+    inset: auto 12% 5% 36%;
     display: flex;
     gap: 1em;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid #B0B0B0;
     background: rgba(255, 255, 255, 0.20);
@@ -110,7 +111,8 @@ export default {
 
 .chatbox {
     height: 80vh;
-    width: 67vw;
+    width: 65vw;
+    
     overflow: scroll;
     flex-direction: column-reverse;
     background-color: #DEDCFF;
