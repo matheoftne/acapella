@@ -237,6 +237,8 @@
     <h2 v-if="!quizEnded">Question n°{{ getCurrentQuestion.index + 1 }}</h2>
 
     <section class="quiz">
+      <img src="/guillemet_1.svg" alt="" class="guillemet guillemet-1">
+      <img src="/guillemet_2.svg" alt="" class="guillemet guillemet-2">
       <div class="quiz-playing" v-if="!quizEnded">
 
         <div class="question">{{ getCurrentQuestion.question }}</div>
@@ -277,11 +279,33 @@
 
       <div class="quiz-ended" v-if="quizEnded">
 
-        <h3>Bravo, vous avez terminé le quiz</h3>
-        <p>Points harcelé : {{ finalScore.victimScore }}</p>
-        <p>Points harceleur : {{ finalScore.offenderScore }}</p>
-        <p>Points témoin : {{ finalScore.witnessScore }}</p>
-        <p>Vous avez répondu à {{ questions.length }} questions</p>
+        <div class="quiz-result-offender result" v-if="finalScore.offenderScore > 4">
+          <h3>Vos réponses portent plus vers un comportement proche de celui d'un harceleur</h3>
+          <p>Prenez le temps de réfléchir à vos mots</p>
+          <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
+        </div>
+
+        <div class="quiz-result-offender result" v-if="finalScore.victimScore > 3">
+          <h3>Vos réponses portent plus vers un comportement proche d'une personne qui est harcelée</h3>
+          <p>Il est important de se rappeler que vous n'êtes pas responsable de ce que vous vivez. Chercher du soutien auprès d'amis, de la famille ou de professionnels peut être un premier pas vers le rétablissement.</p>
+          <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
+        </div>
+
+        <div class="quiz-result-offender result" v-if="finalScore.witnessScore > 3">
+          <h3>Vos réponses indiquent que vous êtes témoin d'harcèlement</h3>
+          <p>Votre position vous permet d'aider les victimes en étant leur voix ou en les soutenant dans leur démarche d'aide. S'informer sur les meilleures façons d'intervenir peut faire une différence.</p>
+          <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
+        </div>
+        
+        <div class="quiz-result-none result" v-if="finalScore.offenderScore <= 4 && finalScore.victimScore <= 3 && finalScore.witnessScore <= 1">
+          <h3>Vos réponses démontrent que vous n'êtes ni témoin, harceleur ou harcelé</h3>
+          <p>Si vous avez des doutes, ne vous fiez pas au résultat du questionnaire. Il est important de se faire confiance.</p>
+          <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
+        </div>
+
+        <div class="buttons">
+          <a class="back2site" href="">Retourner au site</a>
+        </div>
 
       </div>
       
@@ -311,7 +335,6 @@
     height: 8px;
     background-color: #FFA1A1;
     transition: width .5s ease-in-out;
-    width: 50%;
 
       & .progress-bar {
         inset: 100% 0 auto;
@@ -328,7 +351,7 @@
     }
 
     h2 {
-      margin-bottom: 5rem;
+      font-size: 30px;
     }
 
     .quiz-ctn {
@@ -339,11 +362,13 @@
       
         & .quiz {
 
+        margin-top: 5rem;
         align-self: center;
         background-color: #3454D1;
         border-radius: 15px;
         width: 740px;
         padding: 2.5rem 10rem;
+        position: relative;
         
         
         & .quiz-playing, & .quiz-ended {
@@ -396,7 +421,8 @@
           justify-content: center;
           align-items: center;
 
-          & button {
+          & button, & a {
+            color: white;
             padding: .5rem 1.5rem;
             border: white solid 1px;
             border-radius: 10px;
@@ -406,4 +432,31 @@
       }
 
     }
+
+    .guillemet {
+      position: absolute;
+      z-index: 5;
+
+      &.guillemet-1 {
+        inset: -8rem auto auto -12rem;
+      }
+
+      &.guillemet-2 {
+        inset: auto -15rem -5rem auto;
+      }
+
+    }
+
+    .quiz-ended {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      & > .result {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
 </style>
