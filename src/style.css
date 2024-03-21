@@ -25,6 +25,11 @@ h1 {
   line-height: 1.1;
 }
 
+.pad-base {
+  padding: 2em 6em;
+
+}
+
 .btn, button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -56,6 +61,9 @@ h1 {
 #app {
 
   margin: 0 auto;
-  padding: 2em 6em;
   text-align: center;
+}
+
+body {
+  margin: 0;
 }

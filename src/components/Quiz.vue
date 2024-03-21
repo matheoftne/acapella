@@ -223,10 +223,14 @@
 
 <template>
   <div class="quiz-ctn">
-    <h1>Quiz</h1>
+
+    <div class="quiz-header">
+      <h1>Quiz</h1>
+      <div class="progress-bar" :style="{ width: progressBarPercentage + '%' }"></div>
+    </div>
+    
 
     <section class="quiz">
-      <div class="progress-bar" :style="{ width: progressBarPercentage + '%' }"></div>
       <div class="quiz-playing" v-if="!quizEnded">
 
         <div class="question">{{ getCurrentQuestion.question }}</div>
@@ -283,6 +287,24 @@
 
 <style scoped>
 
+.quiz-header {
+    background: linear-gradient(90deg, #3454D1 0%, #9BB0FF 100%);
+    position: relative;
+    inset: auto;
+    text-align: left;
+    padding: 3rem 0 3rem 5rem;
+    color: white;
+  }
+
+  .progress-bar {
+      position: absolute;
+      inset: 100% 0 auto;
+      height: 10px;
+      width: 50%;
+      background-color: #FFA1A1;
+      transition: width .5s ease-in-out;
+    }
+
 .quiz-ctn {
 
   flex-direction: column;
@@ -326,16 +348,6 @@
 
       }
 
-    }
-
-    & .progress-bar {
-      position: absolute;
-      inset: 0 0 auto;
-      border-radius: 100px ;
-      height: 4px;
-      width: 50%;
-      background-color: green;
-      transition: width .5s ease-in-out;
     }
 
     & .buttons {
