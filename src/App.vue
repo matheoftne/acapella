@@ -1,20 +1,15 @@
 <script setup>
-import Quiz from './components/Quiz.vue';
-import Chat from './components/Chat/Chat.vue';
+
+import Chat from './components/Chat/Conversation.vue'
+import Header from './components/Header.vue'
+
 </script>
 
 <template>
-  <div>
-    <Chat/>
-    <!-- <Quiz/> -->
-  </div>
+  <Header />
+  <Chat />
 </template>
 
 <style scoped>
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+
 </style>

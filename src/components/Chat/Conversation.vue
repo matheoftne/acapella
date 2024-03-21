@@ -7,7 +7,7 @@ import { ref, onUnmounted } from 'vue';
 import Message from './Message.vue';
 
 export default {
-  name: 'Chat',
+  name: 'Conversation',
   components: {
     Message
   },
@@ -18,7 +18,22 @@ export default {
       openedMessages:ref([]),
       openedMessageId: null,
       loggedIn: false,
-      title: ""
+      title: "",
+      colors: [
+        "#FFC8E9",
+        "#DEFFBD",
+        "#DEDCFF",
+        "#FFD09A",
+        "#FDFF9A",
+        "#FFB6C1",
+        "#C8E6C9",
+        "#D3D3D3",
+        "#FFA07A ",
+        "#FFE4B5",
+        "#B0E0E6",
+        "#FFDAB9",
+        "#D8BFD8"
+      ]
     }
   },
 
@@ -31,18 +46,21 @@ export default {
     },
     toggleMessage: function(chat) {
       if(this.openedMessageId === chat.id) {
-        this.openedMessageId = null; // Fermer la conversation si elle est déjà ouverte
+        this.openedMessageId = null;
       } else {
-        this.openedMessageId = chat.id; // Ouvrir la conversation sélectionnée
-        this.markAsRead(chat); // Marquer comme lu
+        this.openedMessageId = chat.id;
+        this.markAsRead(chat);
       }
     },
     markAsRead: function(chat) {
       if (!chat.seen) {
-        chat.seen = true; // Marquer le chat comme lu
+        chat.seen = true;
         const chatRef = doc(db, 'chats', chat.id);
-        setDoc(chatRef, { seen: true }, { merge: true }); // Mise à jour dans Firestore
+        setDoc(chatRef, { seen: true }, { merge: true });
       }
+    },
+    getUserInitial(uid) {
+      return uid.charAt(0).toUpperCase();
     }
   },
 
@@ -50,7 +68,7 @@ export default {
     const loginListener = auth.onAuthStateChanged((user)=>{
       if ( user != null ) {
         this.loggedIn = true;
-        this.title = "welcome"
+        this.title = ""
         const chatSnapshot = onSnapshot(
           query(collection(db, 'chats'), orderBy('date', 'desc')),
 
@@ -80,68 +98,79 @@ export default {
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
-  <div v-if="loggedIn">
-    <div class="ChatContainer">
-    <div class="chatsContainer">
-      <h1>Chat</h1>
-      <div v-for="chat in chats">
-        <div @click="toggleMessage(chat)" class="btn" :class="chat.seen ? 'btn-secondary' : 'btn-primary' ">
-          <p>{{ chat.id }} : <strong>{{ chat.latestMessage }}</strong></p>
+  <div v-if="loggedIn" class="ChatContainer">
+    <div class="UserChatContainer">
+      <div v-for="(chat, index) in chats" class="UserChatItems">
+        <div :style="{ backgroundColor: colors[index % colors.length] }" class="ppContainer">
+          <span>{{ getUserInitial(chat.id) }}</span>
+        </div>
+        <div @click="toggleMessage(chat)" class="btnChat" :class="chat.seen ? 'btn-secondary' : 'btn-primary' ">
+          <strong style="font-size: 1.2em;">Anonyme</strong> <br class="brChat">
+          <p style="margin: 0; font-size: 0.9em;">{{ chat.id }}</p>
         </div>
       </div>
     </div>
-    <div v-for="message in chats">
+    <div class="MessageContainer">
+      <div v-for="message in chats">
       <div v-if="openedMessageId && message.id === openedMessageId">
         <message :client="message"></message>
       </div>
     </div>
     <button @click="logout">logout</button>
-  </div>
+    </div>
   </div>
   <div v-else>
     <button @click="login">login</button>
   </div>
-
 </template>
 
 <style scoped>
-  .ChatContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.brChat {
+  margin: 5em;
+}
+.ppContainer {
+  width: 3em;
+  height: 3em;
+  border-radius: 2em;
+}
 
-  .chatsContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.ppContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .chatsContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.ppContainer span {
+  font-size: 1.5em;
+  font-weight: bold;
+}
 
-  .btn {
-    margin: 10px;
-    padding: 10px;
-    width: 10em;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+.ChatContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .btn-primary {
-    background-color: lightskyblue;
-    color: white;
-  }
+.titleMessageContainer {
+  width: 10em;
+  text-align: left;
+}
 
-  .btn-secondary {
-    background-color: grey;
-    color: white;
-  }
+.UserChatContainer {
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+}
+
+.UserChatItems {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1em;
+  margin: 1em;
+}
+
 </style>
