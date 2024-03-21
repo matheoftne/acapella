@@ -291,7 +291,7 @@
           <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
         </div>
 
-        <div class="quiz-result-offender result" v-if="finalScore.witnessScore > 3">
+        <div class="quiz-result-offender result" v-if="finalScore.witnessScore > 1">
           <h3>Vos réponses indiquent que vous êtes témoin d'harcèlement</h3>
           <p>Votre position vous permet d'aider les victimes en étant leur voix ou en les soutenant dans leur démarche d'aide. S'informer sur les meilleures façons d'intervenir peut faire une différence.</p>
           <p>N'hésitez pas à parler à un professionnel pour vous faire écouter</p>
