@@ -304,7 +304,7 @@
         </div>
 
         <div class="buttons">
-          <a class="back2site" href="">Retourner au site</a>
+          <router-link to="/" class="back2site" >Retourner au site</router-link>
         </div>
 
       </div>
