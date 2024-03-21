@@ -149,8 +149,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  height: 80vh;
   overflow: hidden;
 }
 
@@ -163,6 +163,11 @@ export default {
   background-color: #fff;
   color: #000;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  max-height: 80vh;
+  scrollbar-width: none;
 }
 
 .UserChatItems {
