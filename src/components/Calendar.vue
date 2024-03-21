@@ -22,6 +22,10 @@
   const today = ref(new Date());
   const maxDate = ref(new Date('2024-12-31T23:59:59'));
 
+  // Email const
+  const email = ref('');
+  const emailError = ref(null);
+
   // Store available hours
   const availableHours = ref([]);
 
@@ -48,21 +52,16 @@
   });
 
   // Handle alert
-  const showAlert = ref(false);
-  const toggleAlert = () => {
-    showAlert.value = !showAlert.value;
+  const alertInfo = ref({
+    dateAndTime: { show: false, message: 'Veuillez sélectionner une date et un horaire' },
+    email: { show: false, message: 'Veuillez entrer une adresse email valide' }
+  });
+
+  const toggleAlert = (key, show) => {
+    alertInfo.value[key].show = show;
   };
 
-  // Format the date to display it above the select
-  const formattedSelectedDate = computed(() => {
-    if (!selectedDate.value) return '';
 
-    const d = new Date(selectedDate.value);
-    const day = d.getDate().toString().padStart(2, '0');
-    const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-    const year = d.getFullYear();
-    return `${day}/${month}/${year}`;
-  });
 
   // Format the dates that need to be disabled
   const formattedDisabledDates = computed(() => {
@@ -72,7 +71,11 @@
     });
   });
 
-
+  // Validate email
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
 
   // String the given date
   function formatDate(date) {
@@ -105,15 +108,15 @@ async function checkDocument() {
 
   if (docSnap.exists()) {
     const data = docSnap.data()
-    if (data[hourField] !== undefined) {
-      console.log(`Hour ${hour} is already booked`)
+    if (data[hourField]) {
+      console.log(`Hour ${hour} is already booked by ${data[hourField]}`);
     } else {
-      console.log(`Hour ${hour} is not booked, adding the hour now!`);
+      console.log(`Hour ${hour} is not booked, adding the hour now for ${email.value}!`);
       try {
         await updateDoc(docRef, {
-          [hourField]: hour
+          [hourField]: email.value
         });
-        console.log(`Hour ${hour} successfully added to document ${date}.`);
+        console.log(`Hour ${hour} successfully added to document ${date} for ${email.value}.`);
 
         // Check if all hours are now booked
         const bookedHours = Object.keys(data).filter(key => key.startsWith('hour')).length + 1; // +1 for the hour just booked
@@ -131,7 +134,7 @@ async function checkDocument() {
         full: false,
         [hourField]: hour
       })
-      console.log("Document successfully created with ID:", date);
+      console.log("Document successfully created with ID:", date, " for ", email.value);
     } catch (e) {
       console.error("Error creating document: ", e);
     }
@@ -142,12 +145,23 @@ async function checkDocument() {
 async function handleSubmit() {
 
   if (!selectedDate.value || !selectedHour.value) {
-    toggleAlert()
+    toggleAlert('dateAndTime', true)
     return
+  } else {
+    toggleAlert('dateAndTime', false);
   }
+
+  if (!validateEmail(email.value)) {
+    toggleAlert('email', true);
+    return;
+  } else {
+    toggleAlert('email', false);
+  }
+
+  emailError.value = null;
       
-    await checkDocument();
-    selectedDate.value = null;
+  await checkDocument();
+  selectedDate.value = null;
 
 }
 
@@ -182,48 +196,74 @@ async function handleSubmit() {
 
 
 <template>
+  <section class="rdv">
+    <h2>Prenez rendez-vous avec un spécialiste</h2>
+    <p class="subheader">Nous sommes prêt à vous accompagner pour trouver des solutions à vos problèmes</p>
     <form class="calendar" @submit.prevent="handleSubmit">
+      <div class="select-day">
         <DatePicker 
           v-model="selectedDate" 
           :masks="masks" mode="date" 
           :min-date="today"
           :max-date="maxDate"
           :disabled-dates="formattedDisabledDates"
-          is-dark is-required trim-weeks is24hr />
+          is-dark is-required trim-weeks is24hr>
+
+          <template #default="{ inputValue, inputEvents }">
+            <input :value="inputValue" v-on="inputEvents" class="calendar-info-picker" placeholder="Sélectionnez une date"/>
+          </template>
+
+        </DatePicker>
+      </div>
 
 
         <div class="select-time" v-if="selectedDate">
-          <p>{{ formattedSelectedDate }}</p>
-          <select v-model="selectedHour">
-            <option value="" disabled>Sélectionner une heure</option>
+          <select v-model="selectedHour" class="calendar-info-picker">
+            <option value="" disabled>Sélectionnez une heure</option>
             <option v-for="hour in availableHours" :key="hour" :value="hour">{{ hour }}h</option>
           </select>
         </div>
 
-        <button type="submit">Réserver</button>
+        <input type="email" class="calendar-info-picker" placeholder="Votre e-mail" v-model="email">
+
+        <button type="submit" class="submit-calendar-info">Prendre rendez-vous</button>
     </form>
 
-    <div class="reservation-alert-overlay" v-bind:class="showAlert ? 'display-alert' : ''">
+    <div class="reservation-alert-overlay" v-if="alertInfo.dateAndTime.show">
       <div class="reservation-alert error-alert">
-        <p>Veuillez sélectionner une date et un horaire</p>
-        <button @click="toggleAlert">OK !</button>
+        <p>{{ alertInfo.dateAndTime.message }}</p>
+        <button @click="toggleAlert('dateAndTime', false)">OK</button>
       </div>
     </div>
+
+    <div class="reservation-alert-overlay" v-if="alertInfo.email.show">
+      <div class="reservation-alert error-alert">
+        <p>{{ alertInfo.email.message }}</p>
+        <button @click="toggleAlert('email', false)">OK</button>
+      </div>
+    </div>
+
+  </section>
 
 </template>
 
 
 <style scoped>
 
-  .calendar {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+h2 {
+  color: #3454D1;
+  font-size: 60px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.subheader {
+  font-size: 20px;
+  color: #282D2D;
+}
 
   .reservation-alert-overlay {
 
-    display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
     inset: 0;
@@ -233,7 +273,7 @@ async function handleSubmit() {
   
       position: fixed;
       inset: 35% 25%;
-      color: black;
+      color: #282D2D;
       border-radius: 20px;
       padding: 3rem;
       
@@ -263,17 +303,45 @@ async function handleSubmit() {
 
   }
 
+  .rdv {
+    width: 100vw;
+    background-color: #D8E0FF;
+    padding: 3rem 5rem;
+  }
+
+  form.calendar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1.15rem;
+  }
+
+  .calendar-info-picker {
+    background-color: white;
+    color: #282D2D;
+    vertical-align: middle;
+    border: unset;
+    padding: 0 1.2em;
+    border-radius: 10px;
+    min-height: 80px;
+    font-size: 18px;
+  }
+  
+  .submit-calendar-info {
+    font-size: 18px;
+    min-height: 80px;
+    background-color: #3454D1;
+    text-wrap: nowrap;
+    color: white;
+    font-weight: 400;
+    flex-grow: 2;
+  }
+
   .select-time {
 
-    background-color: #0F172A;
-    padding: 1rem 1rem 2rem;
-    
     & select {
-    background-color: #0F172A;
-    border: white solid 1px;
-    padding: .15rem;
-    width: 80%;
-    border-radius: 5px;
 
       &::-webkit-scrollbar {
         width: 4px;
