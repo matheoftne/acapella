@@ -108,7 +108,7 @@ export default {
           <div>
             <span :class="chat.seen ? 'btn-secondary' : 'btn-primary' "><i class="fa-solid fa-circle"></i></span>
             <strong style="font-size: 1.2em;"> Anonyme</strong> <br class="brChat">
-            <p style="margin: 0; font-size: 0.9em;">{{ chat.id }}</p>
+            <p style="margin: 0; font-size: 0.9em; text-wrap: wrap">{{ chat.id }}</p>
           </div>
         </div>
       </div>
@@ -148,6 +148,7 @@ export default {
   width: 3em;
   height: 3em;
   border-radius: 2em;
+  aspect-ratio: 1 / 1;
 }
 
 .ppContainer {
@@ -162,7 +163,8 @@ export default {
 }
 
 .ChatContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;

@@ -94,15 +94,18 @@ export default {
 .inputTextContainer {
     position: absolute;
     z-index: 2;
-    inset: auto 12% 5% 36%;
+    inset: auto 15% 2%;
     display: flex;
     gap: 1em;
-    justify-content: space-between;
     align-items: center;
     border: 1px solid #B0B0B0;
     background: rgba(255, 255, 255, 0.20);
     backdrop-filter: blur(11.699999809265137px);
     border-radius: 20px;
+}
+
+.MessageContainer {
+    position: relative;
 }
 
 .messageContainer:first-child {
@@ -111,8 +114,6 @@ export default {
 
 .chatbox {
     height: 80vh;
-    width: 65vw;
-    
     overflow: scroll;
     flex-direction: column-reverse;
     background-color: #DEDCFF;
