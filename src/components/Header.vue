@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="menuContainer">
+    <div class="menuContainer pad-base">
         <div class="logoContainer">
             <img class="logo" src="/logo-acapela.png" alt="">
         </div>
@@ -24,7 +24,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2em;
     }
 
     .menuItems {
@@ -38,4 +37,6 @@
         height: 4em;
         width: 10em;
     }
+
+    
 </style>
