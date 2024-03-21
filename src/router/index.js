@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import ChatPro from '../components/Chat/Conversation.vue';
-import Chat from '../views/Chat.vue';
 import Quiz from '../components/Quiz.vue';
 import NotFound from '../views/NotFound.vue';
 
@@ -12,13 +11,6 @@ const routes = [
         component: Home,
         meta: {
             title: 'Home'
-        }
-    }, {
-        name: 'Chat',
-        path: '/chat',
-        component: Chat,
-        meta: {
-            title: 'Chat'
         }
     }, {
         name: 'Quiz',
