@@ -76,7 +76,7 @@
                     <img class="thumbnail" :src="article.thumbnail" :alt="`Image pour ${article.title}`">
                     <h3>“{{ article.title }}“</h3>
                     <p>{{ article.excerpt }}</p>
-                    <router-link to="/" class="read-article">Lire l'article <img src="/right-arrow.svg" alt="Lire l'article"> </router-link>
+                    <router-link to="/article" class="read-article">Lire l'article <img src="/right-arrow.svg" alt="Lire l'article"> </router-link>
                 </div>
             </div>
         </div>
@@ -109,6 +109,11 @@
         color: white;
         margin-bottom: 5rem;
         text-wrap: balance;
+    }
+
+    h2 {
+        font-size: 1.875em;
+        font-weight: 700;
     }
 
     .articles-grid {
