@@ -33,7 +33,7 @@
                     <router-link to="/">Parlons en ?</router-link>
                     <router-link to="/">A propos</router-link>
                     <router-link to="/">Cyberharcèlement</router-link>
-                    <router-link to="/">Blog</router-link>
+                    <router-link to="/blog">Blog</router-link>
                     <router-link to="/">Contact</router-link>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                 }
 
                 & button {
-                    color: black;
+                    color: #282D2D;
                     background-color: white;
                     padding: 20px 100px;
                     border-radius: 30px;

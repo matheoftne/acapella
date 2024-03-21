@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import ChatPro from '../components/Chat/Conversation.vue';
 import Quiz from '../components/Quiz.vue';
 import NotFound from '../views/NotFound.vue';
+import Blog from '../components/Blog.vue';
 
 const routes = [
     {
@@ -32,6 +33,13 @@ const routes = [
         component: ChatPro,
         meta: {
             title: 'Chat Pro'
+        }
+    }, {
+        name: 'Blog',
+        path: '/blog',
+        component: Blog,
+        meta: {
+            title: 'Blog'
         }
     }
 ];

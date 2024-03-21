@@ -331,7 +331,7 @@
     position: absolute;
     text-align: end;
     inset: 100% 0 0;
-    color: black;
+    color: #282D2D;
     height: 8px;
     background-color: #FFA1A1;
     transition: width .5s ease-in-out;
@@ -393,7 +393,7 @@
             display: flex;
             margin-block: 2rem;
             padding: 1rem 1.5rem;
-            color: black;
+            color: #282D2D;
             background-color: rgba(255, 255, 255, .7);
             border-radius: 5px;
             cursor: pointer;

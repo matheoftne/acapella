@@ -43,6 +43,11 @@ h1 {
 }
 
 h2 {
+  font-size: 1.875em;
+  font-weight: 700;
+}
+
+h2 {
   font-size: 3.2em;
   line-height: 1.1;
 }
