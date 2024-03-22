@@ -1,60 +1,90 @@
-<script>
+<script setup>
 
-export default {
-    data() {
-        return {
-            vids: [
-                {
-                    "duration": "1:00",
-                    "desc": "Emilie nous raconte comment elle a surpassé le cyberharcèlement"
-                },
-                {
-                    "duration": "1:00",
-                    "desc": "Emilie nous raconte comment elle a surpassé le cyberharcèlement"
-                },
-                {
-                    "duration": "1:00",
-                    "desc": "Emilie nous raconte comment elle a surpassé le cyberharcèlement"
-                },
-            ]
-        }
+import { ref } from 'vue';
+
+const videos = ref([
+    {
+        title: 'Emilie nous raconte comment elle a surpassé le cyberharcèlement',
+        img: 'blog-video-thumbnail-1.png',
+        videoLength: '1:00'
+    },
+    {
+        title: 'Emilie nous raconte comment elle a surpassé le cyberharcèlement',
+        img: 'blog-video-thumbnail-1.png',
+        videoLength: '1:00'
+    },
+    {
+        title: 'Emilie nous raconte comment elle a surpassé le cyberharcèlement',
+        img: 'blog-video-thumbnail-1.png',
+        videoLength: '1:00'
     }
-}
+  ])
 
 </script>
 
 <template>
-    <div class="pad-base">
-        <h2 style="color: #3454D1; text-align: left">Nos dernières vidéos</h2>
-        <div class="vidsContainer" style="display: flex; flex-direction: row; gap: 10em; justify-content: center; align-items: flex-start;">
-            <div v-for="vid in vids" style="">
-                <div class="backgroundImage" style="text-align: left;">
-                    <p class="duration">{{ vid.duration }}</p>
-                    <p style="font-size: 2em; font-weight: 700; margin: 0; width: 8em;">{{ vid.desc }}</p>
+    <div class="latest-videos pad-base">
+        <h2>Nos dernières vidéos</h2>
+        <div class="videos-grid">
+            <div class="grid-item" v-for="video in videos" :key="video.title">
+                <img class="thumbnail" :src="video.img" :alt="`Image pour ${video.title}`">
+                <div class="video-grid-item-content">
+                    <span>{{ video.videoLength }}</span>
+                    <h3>{{ video.title }}</h3>
                 </div>
+                <img class="play-button" src="/Play.svg" alt="Lire la vidéo">
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-    .backgroundImage {
-        background-image: url(/femme1.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 21.5em;
-        height: 35em;
-        border-radius: 10px;
-        padding: 1em;
-        color: white;
-    }
+    .videos-grid {
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6rem;
+        text-align: start;
+        
+        & .grid-item {
+            position: relative;
+            overflow: clip;
+            border-radius: 15px;
+            
+            & .thumbnail {
+                width: 100%;
+                height: 100%;
+            }
 
-    .duration {
-        padding: 4px 11px;
-        border-radius: 20px;
-        border: 1px solid #D3D3D3;
-        background: rgba(217, 217, 217, 0.51);
+            & .video-grid-item-content {
+                position: absolute;
+                inset: auto 1rem 1%;
+                color: white;
+            }
+
+            & h3 {
+                font-size: 30px;
+                margin-top: 8px;
+            }
+
+            & span {
+                font-size: 16px;
+                font-weight: 700;
+                border-radius: 1.25rem;
+                border: 1px solid #D3D3D3;
+                background: rgba(217, 217, 217, 0.51);
+                padding: .25rem .7rem;
+            }
+
+            & .play-button {
+                position: absolute;
+                inset: 5% 5% auto auto;
+                cursor: pointer;
+            }
+
+        }
+
     }
 
 </style>
