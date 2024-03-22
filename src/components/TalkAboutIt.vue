@@ -67,6 +67,7 @@ import Locaux from './Locaux.vue';
         position: absolute;   
         inset: 0;
         z-index: -60;
+        width: 100vw;
     }
 
     .page-content {
