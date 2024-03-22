@@ -7,6 +7,7 @@ import Blog from '../components/Blog.vue';
 import TalkAboutIt from '../components/TalkAboutIt.vue';
 import Article from '../components/Article.vue';
 import APropos from '../views/APropos.vue';
+import Contact from '../views/Contact.vue';
 
 const routes = [
     {
@@ -60,10 +61,17 @@ const routes = [
         }
     }, {
         name: 'A Propos',
-        path: '/apropos',
+        path: '/a-propos',
         component: APropos,
         meta: {
             title: 'A Propos'
+        }
+    }, {
+        name: 'Contact',
+        path: '/contact',
+        component: Contact,
+        meta: {
+            title: 'Contact'
         }
     }
 ];

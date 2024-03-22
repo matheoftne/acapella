@@ -1,84 +1,74 @@
-<script>
-export default {
-    data() {
-        return {
-            faqItems: [
-                {
-                    q: "What is ChatGPT?",
-                    a: "ChatGPT is a language generation model developed by OpenAI. It's based on the GPT (Generative Pre-trained Transformer) architecture and is designed to generate human-like text and engage in natural-sounding conversations."
-                },
-                {
-                    q: "How does ChatGPT work?",
-                    a:
-                        "ChatGPT uses a deep learning architecture called GPT, which processes input text and generates coherent and contextually relevant responses. It's trained on a vast amount of internet text to learn grammar, context, and style to generate responses that mimic human conversation."
-                },
-                {
-                    q: "What can I use ChatGPT for?",
-                    a:
-                        "ChatGPT can be used for a variety of purposes, including drafting emails, brainstorming ideas, writing code, generating creative content, providing tutoring or information on a wide range of topics, and engaging in simulated conversations."
-                },
-                // add more if required
-            ]
-        };
-    }
-}
-</script>
-
 <template>
+    <div class="pad-base faqContainer">
+        <h2>Questions récurrentes</h2>
+        <h3>Retrouvez les questions qui reviennent le plus régulièrement dans cette FAQ</h3>
+        <div class="faqItems" v-for="(faq, index) in faqs" :key="index" @click="toggleBlock(faq)">
+            <div class="questionContainer">
+                <h3 class="questionTitle">{{ faq.q }}</h3>
+                <p class="answerText" v-if="faq.showAnswer">{{ faq.a }}</p>
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        faqs: [
+          { q: "Comment faire lors qu’on est victime de cyberharcèlement ? ", a: "Oui, très" , showAnswer: false},
+          { q: "Qui pouvons-nous contacter pour en parler ? ", a: "Oui, vraiment très mal", showAnswer: false},
+          { q: "Quelles sont les formes du cyberharcèlement ? ", a: "Oui, vraiment très mal", showAnswer: false},
+          { q: "Que faire si on est témoin de cyberharcèlement ? ", a: "Oui, vraiment très mal", showAnswer: false},
+          { q: "Quand commence le cyberharcèlement ? ", a: "Oui, vraiment très mal", showAnswer: false},
+          { q: "Comment est puni le cyberharcèlement ? ", a: "Oui, vraiment très mal", showAnswer: false},
+        ]
+      }
+    },
+    methods: {
+      toggleBlock(faq) {
+        if (faq.showAnswer === true) {
+          this.faqs.forEach(f => f.showAnswer = false);
+        } else {
+          this.faqs.forEach(f => f.showAnswer = false);
+          faq.showAnswer = true;
+        }
+      },
+    }
+  }
+  </script>
+  
+  <style>
+    .faqItems {
+        display: flex;
+        width: 1348px;
+        padding: 25px 33px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--rouge, #FFA1A1);
+        background: var(--Blanc, #FFF); 
+    }
 
-</template>
+    .faqContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
 
-<style scoped>
-::selection {
-	user-select: none;
-}
-
-/* style the FAQ section */
-.question {
-	background: hsl(35 10% 30% / 0.1);
-	text-transform: uppercase;
-	cursor: pointer;
-	font-weight: bold;
-	box-shadow: 0px 4px 0px 0 #88888855;
-	padding: 10px 0;
-	transition: transform 0.2s;
-	position: relative;
-}
-
-.question:hover {
-	background: hsl(35 10% 30% / 0.15);
-}
-
-.question::before {
-	content: "✅";
-	margin: 10px;
-}
-
-/* styles when the question is clicked */
-.question:active {
-	transform: translateY(4px);
-	box-shadow: none;
-}
-
-
-.answer {
-	overflow: hidden;
-	line-height: 1.5;
-}
-
-.answer::before {
-	content: "👉";
-	margin-right: 10px;
-}
-
-/* style the toggleIcon */
-.toggleIcon {
-	font-size: 1.5em;
-	font-weight: bold;
-	position: absolute;
-	right: 20px;
-	display: inline-block;
-	line-height: 0.5;
-	color: #666;
-}
-</style>
+    h2 {
+        position: relative;
+        &::after {
+            position: absolute;
+            content: url('/red-splash-underline.svg');
+            inset: 30% 0 auto auto;
+            z-index: -5;
+            width: 100%;
+        }
+    }
+  </style>

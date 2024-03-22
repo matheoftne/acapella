@@ -17,7 +17,7 @@
                 <router-link to="/blog">Blog</router-link>
                 <router-link to="/quiz">Quiz</router-link>
                 <router-link to="/chat-pro">Chat</router-link>
-                <router-link class="btn contactBtn" to="/">Contact</router-link>
+                <router-link class="btn contactBtn" to="/contact">Contact</router-link>
             </nav>
         </div>
     </header>
