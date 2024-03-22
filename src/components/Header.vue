@@ -66,7 +66,7 @@
         z-index: -5;
         width: 100%;
         height: 30px;
-        background-image: url('/red-splash-underline.svg');
+        background-image: url('/blue-splash-underline.svg');
         background-size: 100% 100%;
         background-repeat: no-repeat;
 
