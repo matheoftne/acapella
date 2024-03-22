@@ -4,6 +4,7 @@ import ChatPro from '../components/Chat/Conversation.vue';
 import Quiz from '../components/Quiz.vue';
 import NotFound from '../views/NotFound.vue';
 import Blog from '../components/Blog.vue';
+import TalkAboutIt from '../components/TalkAboutIt.vue';
 
 const routes = [
     {
@@ -40,6 +41,13 @@ const routes = [
         component: Blog,
         meta: {
             title: 'Blog'
+        }
+    }, {
+        name: 'Parlons-en',
+        path: '/parlons-en',
+        component: TalkAboutIt,
+        meta: {
+            title: 'Parlons-en'
         }
     }
 ];
