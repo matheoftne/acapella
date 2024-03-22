@@ -304,7 +304,6 @@ h2 {
   }
 
   .rdv {
-    width: 100vw;
     background-color: #D8E0FF;
     padding: 3rem 5rem;
   }
