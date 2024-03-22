@@ -11,8 +11,8 @@
                     <h1 style="color: #fff; width: 10em; text-align: start;">Envie de nous contacter ?</h1>
                     <p style="color: #fff; text-align: start;">Et si on en discutait en vrai ? </p>
                 </div>
-                <div class="maps" style="width: 486px; height: 313px; background-color: #fff; border-radius: 20px;">
-                    
+                <div class="maps" style="width: 486px; height: 313px; background-color: #fff; border-radius: 20px; overflow: clip;">
+                    <iframe width="100%" height="313px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=12%20Rue%20des%20Charmes,%2093100%20Montreuil+(Acapela)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps tracker sport</a></iframe>
                 </div>
                 <div class="contact">
                     <div style="display: flex; justify-self: center; align-items: center; gap: 2em; color: #fff; font-weight: 700; font-size: 1.5em;">
