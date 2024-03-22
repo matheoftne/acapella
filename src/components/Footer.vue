@@ -30,7 +30,7 @@
                 <h3>Navigation</h3>
                 <div class="grid-item-content grid-item-column">
                     <router-link to="/">Accueil</router-link>
-                    <router-link to="/">Parlons en ?</router-link>
+                    <router-link to="/parlons-en">Parlons en ?</router-link>
                     <router-link to="/">A propos</router-link>
                     <router-link to="/">Cyberharcèlement</router-link>
                     <router-link to="/blog">Blog</router-link>

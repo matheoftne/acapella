@@ -93,4 +93,5 @@ h2 {
 body {
   margin: 0;
   font-family: Montserrat, sans-serif;
+  overflow-x: clip;
 }
