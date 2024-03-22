@@ -1,6 +1,6 @@
 <template>
     <div class="pad-base faqContainer">
-        <h2>Questions récurrentes</h2>
+        <h2 class="titleFAQ">Questions récurrentes</h2>
         <h3>Retrouvez les questions qui reviennent le plus régulièrement dans cette FAQ</h3>
         <div class="faqItems" v-for="(faq, index) in faqs" :key="index" @click="toggleBlock(faq)">
             <div class="questionContainer">
@@ -61,7 +61,7 @@
         gap: 20px;
     }
 
-    h2 {
+    .titleFAQ {
         position: relative;
         &::after {
             position: absolute;
