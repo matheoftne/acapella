@@ -1,8 +1,8 @@
 <template>
     <div style="margin-bottom: 30em;">
         <div style="position: absolute; z-index: -1; inset: auto; width: 100vw">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1728" height="710" viewBox="0 0 1728 710" fill="none" style="width: 100vw; position: absolute; z-index: -1; inset: 0; width: 100vw"">
-                <path d="M0 0H1728V710C1049.41 600.857 670.978 598.819 0 710V0Z" fill="#D8E0FF" style="width: 100vw; position: absolute; z-index: -1; inset: 0; width: 100vw"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="710" viewBox="0 0 1728 710" fill="none" style="width: 100vw; position: absolute; z-index: -1; inset: 0; width: 100vw">
+                <path d="M0 0H1728V710C1049.41 600.857 670.978 598.819 0 710V0Z" fill="#D8E0FF"/>
             </svg>
         </div>
         <span style="position: absolute; inset: auto auto auto 55em;">
