@@ -17,5 +17,5 @@ import TypeHarrasments from '../components/TypeHarrasments.vue';
 </template>
 
 <style scoped>
-    
+
 </style>
