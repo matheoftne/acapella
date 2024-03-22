@@ -5,6 +5,8 @@ import StatsContainer from '../components/StatsContainer.vue';
 import LastVidsContainer from '../components/LastVidsContainer.vue';
 import Participer from '../components/Participer.vue';
 import TypeHarrasments from '../components/TypeHarrasments.vue';
+import ConceptContainer from '../components/ConceptContainer.vue';
+import CitationContainer from '../components/CitationContainer.vue';
 </script>
 
 <template>
@@ -14,6 +16,8 @@ import TypeHarrasments from '../components/TypeHarrasments.vue';
     <LastVidsContainer />
     <Participer />
     <TypeHarrasments />
+    <ConceptContainer />
+    <CitationContainer />
 </template>
 
 <style scoped>

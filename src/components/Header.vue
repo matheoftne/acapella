@@ -12,7 +12,7 @@
         <nav class="menuItems">
             <router-link to="/">Parlons en ?</router-link>
             <router-link to="/">Cyberharcèlement</router-link>
-            <router-link to="/">A propos</router-link>
+            <router-link to="/a-propos">A propos</router-link>
             <router-link to="/blog">Blog</router-link>
             <router-link to="/quiz">Quiz</router-link>
             <router-link to="/chat-pro">Chat</router-link>

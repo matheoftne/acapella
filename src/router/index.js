@@ -5,6 +5,7 @@ import Quiz from '../components/Quiz.vue';
 import NotFound from '../views/NotFound.vue';
 import Blog from '../components/Blog.vue';
 import Article from '../components/Article.vue';
+import APropos from '../views/APropos.vue';
 
 const routes = [
     {
@@ -48,6 +49,13 @@ const routes = [
         component: Article,
         meta: {
             title: 'Article'
+        }
+    }, {
+        name: 'A Propos',
+        path: '/apropos',
+        component: APropos,
+        meta: {
+            title: 'A Propos'
         }
     }
 ];
