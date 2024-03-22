@@ -52,5 +52,25 @@
         margin-bottom: 132.67px;
     }
 
+    nav a {
+
+        position: relative;
+
+    }
+
+    nav a:hover::after, nav .router-link-active:not(.contactBtn)::after {
+
+        position: absolute;
+        content: '';
+        inset: 50% 0 auto;
+        z-index: -5;
+        width: 100%;
+        height: 30px;
+        background-image: url('/red-splash-underline.svg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+    }
+
     
 </style>
